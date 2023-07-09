@@ -1,7 +1,8 @@
 <script>
 
 import { Container, Section, Box, Flex, Grow, Space, List } from "$lib/components";
-import { _app } from "$lib/store/store.js";
+import { _app,save } from "$lib/store/store.js";
+import {onDestroy} from "svelte";
 
 let app = {}
 
@@ -12,7 +13,12 @@ _app.subscribe((value)=>{
 function handleToggleEdit() {
 	app.editMode = !app.editMode;
 	_app.update(()=>{return app});
+	save();
 }
+
+onDestroy(()=>{
+	save();
+})
 
 </script>
 

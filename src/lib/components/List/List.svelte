@@ -39,7 +39,10 @@ let inp = null;
 				name={item.name} 
 				action={()=>{item.checked = !item.checked; update();}}
 				deleteAction={()=>{
-					app.items.splice(app.items.indexOf(item),1);
+					let idx = app.items.indexOf(item);
+					app.items[idx].date_deleted = Date.now();
+					app.trash.push(app.items[idx])
+					app.items.splice(idx,1);
 					update();
 				}}
 			/> 
